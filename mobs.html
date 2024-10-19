@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Manage Mobs</h2>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Mob Name</th>
+                <th>Paddock Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for mob in mobs %}
+            <tr>
+                <td>{{ mob.mob_name }}</td>
+                <td>{{ mob.paddock_name }}</td>
+                <td>
+                    <form method="post" action="{{ url_for('move_mob') }}">
+                        <select name="new_paddock_id" class="form-select">
+                            <option value="1">Paddock 1</option>
+                            <option value="2">Paddock 2</option>
+                        </select>
+                        <input type="hidden" name="mob_id" value="{{ mob.id }}">
+                        <button type="submit" class="btn btn-primary mt-2">Move</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
