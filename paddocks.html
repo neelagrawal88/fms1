@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Paddocks Overview</h2>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Paddock Name</th>
+                <th>Mob</th>
+                <th>Stock Count</th>
+                <th>DM/ha</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for paddock in paddocks %}
+            <tr class="{% if paddock.dm_per_ha < 1500 %}bg-danger{% elif paddock.dm_per_ha < 1800 %}bg-warning{% endif %}">
+                <td>{{ paddock.paddock_name }}</td>
+                <td>{{ paddock.mob_name }}</td>
+                <td>{{ paddock.stock_count }}</td>
+                <td>{{ paddock.dm_per_ha }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{{ url_for('advance_date') }}" class="btn btn-success">Advance to Next Day</a>
+{% endblock %}
